@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/masterTemplate.xhtml">
+
+	<ui:define name="title">Perfil</ui:define>
+	<ui:define name="body">
+		<h:form id="form11" prependId="false">
+
+			<script type="text/javascript">
+			function limpiarForm()
+			{       
+				$('.Name').attr('value', '');
+			}
+			</script>
+
+		
+			<p:growl id="growlAdmin" />
+			<p:panel id="panelAdmin" header="Editar Perfil"
+				style="margin-bottom:10px;">
+
+				
+
+				<p:panelGrid id="registroForm" columns="2" cellpadding="5">
+
+					
+				
+
+					<h:outputLabel for="pwd1" value="Contraseña: " />
+
+					<p:password id="pwd1" value="#{perfilBean.contrasena}" match="pwd2"
+						label="Contraseña 1" feedback="true" inline="true" />
+
+					<h:outputLabel for="pwd2" value="Confirmación Contraseña: " />
+					<p:password id="pwd2" value="#{perfilBean.contrasena}"
+						label="Contraseña 2" />
+
+
+
+					
+				</p:panelGrid>
+				
+				<p:commandButton value="Modificar" id="botonModificarPerfil"
+					update="growlAdmin" action="#{perfilBean.cambiarContrasenia()}" />
+					
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+	
+	
+	<ui:define name="menuIzq">
+		<ui:include src="/menuPrincipalAdminEmpresa.xhtml" />
+
+	</ui:define>
+</ui:composition>

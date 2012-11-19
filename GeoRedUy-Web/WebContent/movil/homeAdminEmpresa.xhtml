@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page title="GeoRedUy" id="pagina">
+		<pm:view id="home" swatch="c">
+			<pm:header title="Mis Solicitudes">
+			<style type="text/css">
+								.ui-header .ui-fullsize .ui-btn-inner,.ui-footer .ui-fullsize .ui-btn-inner
+								{
+									font-size: 12px;
+								}
+						</style>
+				<f:facet name="right">
+					<p:commandButton value="Salir" action="#{loginBean.cerrarSesion}" immediate="true"/>
+				</f:facet>
+				<pm:navBar>
+					<p:button value="Nuevo Local" icon="plus" href="main?reverse=true"
+						update="pm:pagina" styleClass="ui-btn-active" />
+					<p:button value="Nueva Oferta" icon="plus"
+						href="misSolicitudesUsuario.xhtml"
+						action="#{tablaIncidenteBean.listarIncidentes()}"
+						styleClass="ui-btn-inactive" />
+				</pm:navBar>
+			</pm:header>
+			<pm:content>
+				<h:form id="nuevaSolicitudForm">
+					<h:panelGrid id="grid" columns="1">
+
+						<pm:field>
+							<h:outputLabel for="asunto" value="Asunto*:"
+								style="font-weight:bold" />
+							<p:inputText id="asunto" value="#{tareaBean.asunto}"
+								required="true" requiredMessage="Debe ingresar un asunto."
+								styleClass="Name" size="70" />
+						</pm:field>
+
+						<pm:field>
+							<h:outputLabel
+								value="¿Este incidente le permite continuar con su trabajo?"
+								style="font-weight:bold" />
+
+							<h:selectOneRadio value="#{tareaBean.pregunta1}" required="true" requiredMessage="Debe elegir una respuesta a la primer pregunta.">
+								<f:selectItem itemLabel="Si" itemValue="1" />
+								<f:selectItem itemLabel="No" itemValue="2" />
+							</h:selectOneRadio>
+
+							<h:outputLabel value="¿La falla le ocurrió solo a usted?"
+								style="font-weight:bold" />
+
+							<h:selectOneRadio value="#{tareaBean.pregunta2}" required="true" requiredMessage="Debe elegir una respuesta a la segunda pregunta.">
+								<f:selectItem itemLabel="Si" itemValue="1" />
+								<f:selectItem itemLabel="No" itemValue="2" />
+							</h:selectOneRadio>
+						</pm:field>
+						
+						<pm:field>
+							<h:outputLabel for="descripcion" value="Descripcion*:"
+								style="font-weight:bold" />
+							<p:inputTextarea id="descripcion" required="true"
+								value="#{tareaBean.descripcion}" rows="6" cols="70"
+								requiredMessage="Debe ingresar una descripcion." />
+						</pm:field>
+						<p:messages id="messages" autoUpdate="true" closable="true" />
+						<p:commandButton value="Crear" id="btnAll" update=":nuevaSolicitudForm"
+							actionListener="#{tareaBean.crearIncidente(sesionBean.mail)}" />
+
+					</h:panelGrid>
+				</h:form>
+			</pm:content>
+		</pm:view>
+	</pm:page>
+</f:view>
+
+

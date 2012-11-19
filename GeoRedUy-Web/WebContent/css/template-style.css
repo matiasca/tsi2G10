@@ -1,0 +1,21 @@
+* {
+    padding: 0;
+    margin: 0;
+} 
+
+.gridreporte tr, .gridreporte td {
+    border: none;
+}
+
+.ui-button-text{
+    font-size: 13px;
+}
+
+
+body {
+
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 11px;
+line-height: 18px;
+color: #aaa;
+}

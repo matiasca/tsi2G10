@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+
+<f:event listener="#{loginBean.redireccionMovil}" type="preRenderView" />
+
+	<pm:page title="GeoRedUy">
+		
+		<script type="text/javascript">
+			function limpiarForm()
+			{       
+				$('.Name').attr('value', '');
+			}
+		</script>
+		
+        <pm:header title="GeoRedUy">
+        </pm:header>
+		<pm:content>
+			<h:form>
+				<h:outputLabel for="usuario" value="Email: " />
+				<p:inputText id="usuario" value="#{loginBean.usuario}"
+					styleClass="UserName" required="true"
+					requiredMessage="Debe ingresar su email."
+					validatorMessage="Mail inválido." >
+					<f:validateRegex
+						pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+				</p:inputText>
+
+
+				<h:outputLabel for="contrasenia" value="Contraseña: " />
+				<p:inputText id="contrasenia" type="password"
+					value="#{loginBean.contrasenia}" required="true"
+					requiredMessage="Debe ingresar su contraseña." styleClass="Name"
+					 />
+				
+				<p:separator />
+				<p:messages id="messages" autoUpdate="true" closable="true" />
+				<p:commandButton id="btnLogin" value="Iniciar Sesion"
+					styleClass="buttonLogin" action="#{loginBean.iniciarSesion}"
+					oncomplete="limpiarForm()"  />
+			</h:form>
+		</pm:content>
+	</pm:page>
+</f:view>
+
+
+
